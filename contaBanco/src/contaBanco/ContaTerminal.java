@@ -1,5 +1,6 @@
 package contaBanco;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ContaTerminal {
@@ -36,28 +37,38 @@ public class ContaTerminal {
 		this.saldo = saldo;
 	}
 	
+	 
 	public void banco() {
-		System.out.print("Por favor, digite seu nome:");
-		String nome = sc.next();
-		setNomeCliente(nome);
+		try {
+			System.out.print("Por favor, digite seu nome:");
+			String nome = sc.next();
+			setNomeCliente(nome);
+			
+			System.out.print("Por favor, digite o número de sua agência:");
+			String agencia = sc.next();
+			setAgencia(agencia);
+			
+			System.out.print("Por favor, digite o número da sua conta:");
+			int conta = sc.nextInt();
+			setNumeroConta(conta);
+			
+			System.out.print("Por favor, digite seu saldo:");
+			double saldo = sc.nextDouble();
+			setSaldo(saldo);
+			
+			System.out.print("\n Olá " + getNomeCliente()+
+					", obrigado por criar uma conta em nosso banco,\n sua agência é: "+ getAgencia()+
+					",\n sua conta: " + getNumeroConta()+
+					"\n e seu saldo: "+ getSaldo()+ " já está disponível para saque.");
+			
+		} catch (InputMismatchException e) {
+			System.out.print("\n --Por favor, insira apenas números-- ");
+			
+		}finally {
+			sc.close();
+		}
 		
-		System.out.print("Por favor, digite o número de sua agência:");
-		String agencia = sc.next();
-		setAgencia(agencia);
-		
-		System.out.print("Por favor, digite o número da sua conta:");
-		int conta = sc.nextInt();
-		setNumeroConta(conta);
-		
-		System.out.print("Por favor, digite seu saldo:");
-		double saldo = sc.nextDouble();
-		setSaldo(saldo);
-		
-		
-		System.out.print("\n Olá " + getNomeCliente()+
-				", obrigado por criar uma conta em nosso banco,\n sua agência é: "+ getAgencia()+
-				",\n sua conta: " + getNumeroConta()+
-				"\n e seu saldo: "+ getSaldo()+ " já está disponível para saque.");
 		
 	}
+	
 }
